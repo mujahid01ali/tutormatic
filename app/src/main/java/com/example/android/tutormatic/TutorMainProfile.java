@@ -220,7 +220,7 @@ public class TutorMainProfile extends Fragment implements View.OnClickListener {
                             String[] arr = send.split("[{=,}]");
                             Intent intentEdu = new Intent(getContext(), UpdateTutorEducation.class);
                             intentEdu.putExtra("id", arr[2]);
-                            startActivity(intentEdu);
+                           // startActivity(intentEdu);
                             //Toast.makeText(getContext(),"Oho0",Toast.LENGTH_SHORT).show();
                         }
                     });
