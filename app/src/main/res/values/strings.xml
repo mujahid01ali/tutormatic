@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Tutor Matic</string>
+    <string name="title_activity_student_profile">StudentProfile</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_tutor_profile">TutorProfile</string>
+    <string name="title_activity_login">LoginActivity</string>
+
+    <string name="title_activity_splash_home">splashHome</string>
+    <string name="dummy_content">Tutor Matic</string>
+    <string name="title_activity_splash">Tutor Matic</string>
+    <string name="login_prompt">Choose Any One</string>
+    <string-array name="login_arrays">
+        <item>Choose Any One</item>
+        <item>Student</item>
+        <item>Tutor</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_insert_education_tutor">InsertEducationTutor</string>
+</resources>
