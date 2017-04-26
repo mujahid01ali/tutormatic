@@ -22,11 +22,35 @@
                 android:layout_height="wrap_content"
                 android:textSize="17dp"
                 android:textColor="@color/colorAccent"
+                android:text="First Name"/>
+            <EditText
+                android:id="@+id/etTutFName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:textColor="@color/colorAccent"
+                android:text="Last Name"/>
+            <EditText
+                android:id="@+id/etTutLName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:textColor="@color/colorAccent"
                 android:text="Mobile Number"/>
             <EditText
                 android:id="@+id/etTutMobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="10"
                 android:layout_marginBottom="10dp" />
             <TextView
                 android:layout_width="match_parent"
@@ -66,12 +90,21 @@
                 android:layout_height="wrap_content"
                 android:textSize="17dp"
                 android:textColor="@color/colorAccent"
+                android:layout_marginBottom="10dp"
                 android:text="State"/>
-            <EditText
-                android:id="@+id/etTutState"
+            <Spinner
+                android:id="@+id/spinnerState"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp" />
+                android:layout_height="55dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/dropdrown"
+                android:dropDownSelector="#462020"
+                android:entries="@array/state_arrays"
+                android:gravity="center"
+                android:outlineProvider="bounds"
+                android:popupBackground="#ffffff"
+                android:prompt="@string/state_prompt"
+                android:spinnerMode="dropdown" />
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

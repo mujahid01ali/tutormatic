@@ -93,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         dialog.dismiss();
                         Log.e("Aligarh", response);
                         if (response.toString().contains("success")) {
-                            Toast.makeText(getApplicationContext(), "You are registered Successfully", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Please Check your registered email for account activation", Toast.LENGTH_LONG).show();
                             Intent in = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(in);
                             finish();
@@ -114,9 +114,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> param = new HashMap<>();
-                        param.put("txtUserType", userType);
-                        param.put("txtEmail", emailId);
-                        param.put("txtPassword", password);
+                        param.put("txtUserType", userType.trim());
+                        param.put("txtEmail", emailId.toLowerCase().trim());
+                        param.put("txtPassword", password.toLowerCase().trim());
                         return param;
                     }
                 };

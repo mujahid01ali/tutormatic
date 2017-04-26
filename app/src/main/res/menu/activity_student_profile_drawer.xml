@@ -3,29 +3,27 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_updateInfo"
-            android:icon="@drawable/ic_menu_update"
-            android:title="Update" />
+            android:id="@+id/nav_StudentMain"
+            android:icon="@drawable/ic_person"
+            android:title="Profile" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:id="@+id/nav_searchTutor"
+            android:icon="@drawable/ic_search"
             android:title="Search Tutor" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-        <item
-            android:id="@+id/nav_share"
-            android:icon="@drawable/ic_menu_share"
-            android:title="Share" />
+            android:id="@+id/nav_tutor"
+            android:icon="@drawable/ic_action_list"
+            android:title="Your Tutors" />
+
+
     </group>
 
     <item android:title="Others">
         <menu>
+            <item
+                android:id="@+id/nav_change_password"
+                android:icon="@drawable/ic_note_update"
+                android:title="Change Password" />
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/ic_menu_logout"

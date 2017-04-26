@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f1f1f1"
     android:orientation="vertical">
 
     <LinearLayout
@@ -9,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="#ffffff"
+        android:paddingLeft="5dp"
         android:elevation="10dp"
         android:orientation="horizontal"
         android:translationZ="2dp">
@@ -35,6 +37,7 @@
         android:id="@+id/tutMainScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#ffffff"
         android:fillViewport="true"
         android:scrollbars="none">
 
@@ -45,8 +48,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
+                android:layout_height="10dp"
+                android:background="#f1f1f1" />
 
 
             <LinearLayout
@@ -60,33 +63,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="Basic Deatils"
+                    android:text="Basic Details"
+                    android:paddingLeft="5dp"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="25dp"
+                    android:textSize="22dp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
                     android:textSize="17dp" />
 
                 <TextView
                     android:id="@+id/txtMobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
                     android:textSize="17dp" />
 
                 <TextView
                     android:id="@+id/txtAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
                     android:textSize="17dp" />
 
                 <TextView
                     android:id="@+id/txtBasicEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
                     android:text="Edit"
                     android:textColor="@color/colorPrimary" />
             </LinearLayout>
@@ -94,8 +102,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
+                android:layout_height="10dp"
+                android:background="#f1f1f1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -108,9 +116,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
+                    android:paddingLeft="5dp"
                     android:text="Education"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="25dp"
+                    android:textSize="22dp"
                     android:textStyle="bold" />
 
                 <ListView
@@ -126,6 +135,7 @@
                     android:id="@+id/txtAddEdu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
                     android:text="Add More"
                     android:textColor="@color/colorAccent"
                     android:textSize="18dp" />
@@ -133,9 +143,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
+                android:layout_height="10dp"
+                android:background="#f1f1f1" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -147,9 +156,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
+                    android:paddingLeft="5dp"
                     android:text="Skills"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="25dp"
+                    android:textSize="22dp"
                     android:textStyle="bold" />
 
                 <ListView
@@ -172,8 +182,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
+                android:layout_height="10dp"
+                android:background="#f1f1f1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -186,9 +196,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="Active Slots"
+                    android:paddingLeft="5dp"
+                    android:text="All Slots"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="25dp"
+                    android:textSize="22dp"
                     android:textStyle="bold" />
 
                 <ListView
@@ -205,7 +216,9 @@
                     android:id="@+id/txtAddSlot"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:text="Add Slot"
+                    android:paddingLeft="10dp"
                     android:textColor="@color/colorPrimary"
                     android:textSize="17dp" />
 

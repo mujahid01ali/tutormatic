@@ -3,8 +3,6 @@ package com.example.android.tutormatic;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -25,11 +23,11 @@ import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     EditText txtUserName, txtPassword;
-    TextView txtRegister;
+    TextView txtRegister,txtForgot;
     Button btnLogin;
     Spinner spinnerLogin;
     ProgressDialog dialog;
-    String url = Config.baseUrl + "studentLogin.php";
+    String url = Config.baseUrl2 + "TM_Script/loginActivityTutorMatic.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,22 +35,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        setTitle("Tutor Matic");
         txtUserName = (EditText) findViewById(R.id.txtUser);
         txtPassword = (EditText) findViewById(R.id.txtPass);
         txtRegister = (TextView) findViewById(R.id.txtRegister);
+        txtForgot=(TextView)findViewById(R.id.txtForget);
         spinnerLogin = (Spinner) findViewById(R.id.spinnerLogin);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(this);
         txtRegister.setOnClickListener(this);
+        txtForgot.setOnClickListener(this);
     }
 
     @Override
@@ -62,6 +54,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         if (v == txtRegister) {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        }
+        if (v==txtForgot){
+            Intent intent = new Intent(LoginActivity.this, OtpAuth.class);
             startActivity(intent);
         }
     }
@@ -103,8 +99,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> param = new HashMap<>();
-                    param.put("txtUsername", txtUserName.getText().toString());
-                    param.put("txtPassword", txtPassword.getText().toString());
+                    param.put("txtUsername", txtUserName.getText().toString().toLowerCase().trim());
+                    param.put("txtPassword", txtPassword.getText().toString().toLowerCase().trim());
                     param.put("txtSelection", spinnerLogin.getSelectedItem().toString());
                     return param;
                 }

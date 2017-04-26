@@ -2,13 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/txtWelComeText"
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
-    <GridView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></GridView>
+        android:dividerHeight="10dp"
+        android:divider="#e6e6e6"
+        android:background="#ffffff"
+        android:layout_marginTop="10dp"
+        android:scrollbars="none"
+        android:id="@+id/list_view_review">
+    </ListView>
 
 </LinearLayout>

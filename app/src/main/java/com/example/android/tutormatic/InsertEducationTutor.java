@@ -4,7 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +25,18 @@ public class InsertEducationTutor extends AppCompatActivity implements View.OnCl
     Button btnSaveEdu;
     String url = Config.baseUrl2+"TM_Script/addTutorEducation.php";
     ProgressDialog dialog;
+    private String blockCharacterSet = "~#={}()^,|$%&*!";
+    private InputFilter filter = new InputFilter() {
+
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+
+            if (source != null && blockCharacterSet.contains(("" + source))) {
+                return "";
+            }
+            return null;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +47,11 @@ public class InsertEducationTutor extends AppCompatActivity implements View.OnCl
         txtStartYear = (EditText) findViewById(R.id.etStartYear);
         txtEndYear = (EditText) findViewById(R.id.etEndYear);
         txtStream = (EditText) findViewById(R.id.etStream);
+        txtCourse.setFilters(new InputFilter[]{filter});
+        txtCollege.setFilters(new InputFilter[]{filter});
+        txtStartYear.setFilters(new InputFilter[]{filter});
+        txtEndYear.setFilters(new InputFilter[]{filter});
+        txtStream.setFilters(new InputFilter[]{filter});
         btnSaveEdu = (Button) findViewById(R.id.eduSave);
 
         btnSaveEdu.setOnClickListener(this);
@@ -48,21 +66,15 @@ public class InsertEducationTutor extends AppCompatActivity implements View.OnCl
             public void onResponse(String response) {
                 dialog.dismiss();
                 if (response.toString().contains("success")){
-                    Log.d("Education",response.toString());
-                    Toast.makeText(getApplicationContext(),"Data Insert Successfully",Toast.LENGTH_SHORT).show();
+                    //Log.d("Education",response.toString());
+                    Toast.makeText(getApplicationContext()," Successfully Added",Toast.LENGTH_SHORT).show();
                     Intent intEdu=new Intent(InsertEducationTutor.this,TutorProfile.class);
                     startActivity(intEdu);
                     finish();
                 }
                 if (response.toString().contains("failure")){
-                    Log.d("Educatiovjhjhgjhgjhn",response.toString());
+                    //Log.d("Educatiovjhjhgjhgjhn",response.toString());
                     Toast.makeText(getApplicationContext(),"Please Try Again",Toast.LENGTH_SHORT).show();
-                }
-                else if(response.toString().contains("string")){
-                    Toast.makeText(getApplicationContext(),"Stringin",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(getApplicationContext(),"PleashgjgkjgkjhgjhgjkgjhgjgkjhAgain",Toast.LENGTH_SHORT).show();
                 }
 
             }

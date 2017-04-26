@@ -4,32 +4,33 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_mainProfile"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Profile" />
+            android:icon="@drawable/ic_person"
+            android:title="Your Profile" />
         <item
             android:id="@+id/nav_searchStudents"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_search"
             android:title="Search Students" />
         <item
             android:id="@+id/nav_student_review"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_rate_review"
             android:title="Students Reviews" />
         <item
-            android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Log Out" />
+            android:id="@+id/nav_student_list"
+            android:icon="@drawable/ic_action_list"
+            android:title="Your Students" />
+
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_change_password"
+                android:icon="@drawable/ic_password"
+                android:title="Change Password" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout"
+                android:title="Log Out" />
         </menu>
     </item>
 

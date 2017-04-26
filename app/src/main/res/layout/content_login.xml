@@ -64,14 +64,15 @@
             android:id="@+id/txtForget"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Forget Password"
+            android:text="Forgot Password"
+            android:layout_marginBottom="10dp"
             android:textAlignment="center" />
 
         <TextView
             android:id="@+id/txtRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Register"
+            android:text="New user Register.."
             android:textAlignment="center" />
     </LinearLayout>
 </RelativeLayout>

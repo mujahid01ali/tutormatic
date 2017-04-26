@@ -1,10 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search Students"/>
+        android:textSize="17dp"
+        android:textColor="#0000FF"
+        android:id="@+id/txtLocation"
+        android:layout_gravity="right"
+        android:text="click for location based search"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:background="#ffffff"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/txtSearchWild"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColorHint="@color/colorAccent"
+            android:hint="Type Name,City,class etc." />
+        <ImageButton
+            android:id="@+id/imgSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:src="@drawable/ic_search"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ff0000"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/found"/>
+    <ListView
+        android:id="@+id/listViewSearch"
+        android:layout_width="match_parent"
+        android:background="#ffffff"
+        android:divider="#e6e6e6"
+        android:dividerHeight="10dp"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+
+
 
 </LinearLayout>

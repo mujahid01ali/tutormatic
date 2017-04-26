@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +31,18 @@ public class UpdateSkillTutor extends AppCompatActivity implements View.OnClickL
     EditText etSkill, etTutExp, etTutDes;
     String sk_id;
     ProgressDialog dialog;
+    private String blockCharacterSet = "~#={},()^|$%&*!";
+    private InputFilter filter = new InputFilter() {
+
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+
+            if (source != null && blockCharacterSet.contains(("" + source))) {
+                return "";
+            }
+            return null;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +52,9 @@ public class UpdateSkillTutor extends AppCompatActivity implements View.OnClickL
         etSkill = (EditText) findViewById(R.id.etTutSkill);
         etTutExp = (EditText) findViewById(R.id.etTutExp);
         etTutDes = (EditText) findViewById(R.id.etTutDes);
+        etSkill.setFilters(new InputFilter[]{filter});
+        etTutExp.setFilters(new InputFilter[]{filter});
+        etTutDes.setFilters(new InputFilter[]{filter});
         Bundle extra = getIntent().getExtras();
         sk_id = extra.getString("id");
         getTutSkill();

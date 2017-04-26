@@ -16,8 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import layout.MyFragment;
-
 public class StudentProfile extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     TextView txtHeadName,txtHeadType;
@@ -47,7 +45,7 @@ public class StudentProfile extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //for showing the search activity first
-        displaySelectedScreen(R.id.nav_share);
+        displaySelectedScreen(R.id.nav_StudentMain);
 
 
     }
@@ -87,24 +85,25 @@ public class StudentProfile extends AppCompatActivity
     private void displaySelectedScreen(int id){
         Fragment fragment=null;
         switch (id){
-            case R.id.nav_updateInfo:
-                fragment =new UpdateInfo();
+            case R.id.nav_StudentMain:
+                fragment =new StudentMainProfile();
                 break;
-            case R.id.nav_gallery:
+            case R.id.nav_searchTutor:
                 fragment =new SearchTutor();
-                break;
-            case R.id.nav_share:
-                fragment=new MyFragment();
                 break;
             case R.id.nav_logout:
                 SharedPrefManager.getInstance(getApplicationContext()).logOut();
-                Intent intent=new Intent(StudentProfile.this,LoginActivity.class);
+                Intent intent=new Intent(StudentProfile.this,HomeActivity.class);
                 startActivity(intent);
                 finish();
                 break;
-            case R.id.nav_manage:
-                Intent intent2=new Intent(StudentProfile.this,MapsActivity.class);
-                startActivity(intent2);
+            case R.id.nav_tutor:
+                fragment=new StudentTutors();
+                break;
+            case R.id.nav_change_password:
+                fragment=new StudentChangePassword();
+                break;
+
         }
         if(fragment !=null){
             FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();

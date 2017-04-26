@@ -3,6 +3,7 @@
     package="com.example.android.tutormatic">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -13,7 +14,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/amu"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -60,7 +61,52 @@
         <activity android:name=".InsertTutSkill" />
         <activity android:name=".UpdateSkillTutor" />
         <activity android:name=".UpdateTutorBasicInfo" />
-        <activity android:name=".UpdateTutorEducation"></activity>
+        <activity android:name=".UpdateTutorEducation" />
+        <activity android:name=".UpdateTutSlot" />
+        <activity android:name=".UpdateStudentBasicInfo" />
+        <activity android:name=".UpdateStudentEducation" />
+        <activity android:name=".StudentAddSubject" />
+        <activity android:name=".StudentSubjectAction" />
+        <activity android:name=".UpdateStudentSubject" />
+        <activity android:name=".UpdateStudentSlot" />
+        <activity android:name=".AddStudentSlot" />
+        <activity android:name=".StudentSlotAction" />
+        <activity android:name=".TutorSearchByName" />
+        <activity android:name=".TutorSearchBySkill" />
+        <activity android:name=".TutorSearchByQualification" />
+        <activity android:name=".TutorProfileAfterSearch" />
+        <activity android:name=".SelectActionTutorList" />
+        <activity android:name=".ReviewAndRatingStudent" />
+        <activity android:name=".ReviewAction" />
+        <activity android:name=".StudentProfileAfterSearch" />
+        <activity android:name=".SelectStudentByTutor" />
+
+        <service android:name=".CalculateDistance" />
+
+        <activity android:name=".LocatioSearchByGPS" />
+        <activity android:name=".StudentSearchBasedOnGps" />
+        <activity android:name=".ForgotPassword" />
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TutorListHome"
+            android:label="@string/title_activity_tutor_list_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".StudentListHome"
+            android:label="@string/title_activity_student_list_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".OtpAuth"
+            android:label="@string/title_activity_otp_auth"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".OtpRecieveCheck"
+            android:label="@string/title_activity_otp_recieve_check"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ChangeForgotPassword"></activity>
     </application>
 
 </manifest>

@@ -1,7 +1,9 @@
 package com.example.android.tutormatic;
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -30,6 +33,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Mujahid on 3/8/2017.
@@ -50,6 +54,8 @@ public class TutorMainProfile extends Fragment implements View.OnClickListener {
     String url2;
     String url3;
     String url4;
+    String send;
+    String[] arr, arr1, arr2;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -195,12 +201,14 @@ public class TutorMainProfile extends Fragment implements View.OnClickListener {
                     //listViewSizeEducation(size1);
                     for (int j = 0; j < size1; j++) {
                         JSONObject a = slotArray.getJSONObject(j);
+                        String edu_id = a.getString("edu_id");
                         String course = a.getString("course");
                         String from = a.getString("from");
                         String to = a.getString("to");
                         String college = a.getString("college");
                         String stream = a.getString("stream");
                         HashMap<String, String> edu = new HashMap<String, String>();
+                        edu.put("edu_id", edu_id);
                         edu.put("course", course);
                         edu.put("from", "(" + from + "-");
                         edu.put("to", to + ")");
@@ -209,19 +217,85 @@ public class TutorMainProfile extends Fragment implements View.OnClickListener {
                         educationArrayList.add(edu);
                     }
                     listAdapterEdu = new SimpleAdapter(getActivity(), educationArrayList, R.layout.list_edu_tutor,
-                            new String[]{"course", "from", "to", "college", "stream"}, new int[]{R.id.txtCourse,
-                            R.id.txtFrom, R.id.txtTo, R.id.txtCollege, R.id.txtStream});
+                            new String[]{"course", "from", "to", "college", "stream", "edu_id"}, new int[]{R.id.txtCourse,
+                            R.id.txtFrom, R.id.txtTo, R.id.txtCollege, R.id.txtStream, R.id.txtTutEduId});
                     listViewEducation.setAdapter(listAdapterEdu);
                     setListViewHeightBasedOnChildren(listViewEducation);
                     listViewEducation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            String send = listViewEducation.getItemAtPosition(position).toString();
-                            String[] arr = send.split("[{=,}]");
-                            Intent intentEdu = new Intent(getContext(), UpdateTutorEducation.class);
-                            intentEdu.putExtra("id", arr[2]);
-                           // startActivity(intentEdu);
-                            //Toast.makeText(getContext(),"Oho0",Toast.LENGTH_SHORT).show();
+
+                            send = listViewEducation.getItemAtPosition(position).toString();
+                            arr = send.split("[{=,}]");
+
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            // Get the layout inflater
+                            LayoutInflater inflater = getActivity().getLayoutInflater();
+
+                            // Inflate and set the layout for the dialog
+                            // Pass null as the parent view because its going in the dialog layout
+                            builder.setTitle("Action!")
+                                    // Add action buttons
+                                    .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(final DialogInterface dialog, int id) {
+                                            //final ProgressDialog dialog1;
+                                            //Toast.makeText(getContext(), "Bhak", Toast.LENGTH_SHORT).show();
+
+                                            String urlUpdate = Config.baseUrl2 + "TM_Script/deleteTutorEducation.php";
+                                            final ProgressDialog dialog1 = ProgressDialog.show(getContext(), "", "Please Wait", false, false);
+                                            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
+                                                @Override
+                                                public void onResponse(String response) {
+                                                    dialog1.dismiss();
+                                                    Log.e("Aligarh", response);
+                                                    if (response.toString().contains("success")) {
+                                                        Toast.makeText(getContext(), "Successfully Deleted", Toast.LENGTH_LONG).show();
+                                                        Intent in = new Intent(getContext(), TutorProfile.class);
+                                                        startActivity(in);
+                                                    } else if (response.toString().contains("failure")) {
+                                                        Toast.makeText(getContext(), "Please try Again", Toast.LENGTH_LONG).show();
+                                                    } else if (response.toString().contains("failed")) {
+                                                        Toast.makeText(getContext(), "Error Occured", Toast.LENGTH_LONG).show();
+                                                    }
+                                                }
+                                            }, new Response.ErrorListener() {
+                                                @Override
+                                                public void onErrorResponse(VolleyError error) {
+                                                    dialog1.dismiss();
+                                                    Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                                                }
+                                            }) {
+                                                @Override
+                                                protected Map<String, String> getParams() throws AuthFailureError {
+                                                    Map<String, String> param = new HashMap<>();
+                                                    param.put("eduId", arr[12]);
+                                                    return param;
+                                                }
+                                            };
+                                            RequestHandler.getInstance(getContext()).addToRequestQueue(stringRequest);
+
+
+                                        }
+                                    })
+                                    .setNegativeButton("Update", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            // LoginDialogFragment.this.getDialog().cancel();
+
+                                            Intent intentEdu = new Intent(getContext(), UpdateTutorEducation.class);
+                                            intentEdu.putExtra("idEdu", arr[12]);
+                                            intentEdu.putExtra("data", send);
+                                            startActivity(intentEdu);
+                                            // Toast.makeText(getContext(), "Bhak", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    });
+                            builder.create();
+                            builder.show();
+
+
                         }
                     });
                 } catch (JSONException e) {
@@ -280,20 +354,101 @@ public class TutorMainProfile extends Fragment implements View.OnClickListener {
                     //listViewSizeSlot(size2);
                     for (int j = 0; j < size2; j++) {
                         JSONObject a = courseArray.getJSONObject(j);
+                        String slot_id = a.getString("slot_id");
                         String startTime = a.getString("startTime");
                         String lastTime = a.getString("lastTime");
                         String status = a.getString("status");
                         HashMap<String, String> slot = new HashMap<String, String>();
-                        slot.put("startTime", "(" + startTime + "-");
+                        slot.put("slot_id", slot_id);
+                        slot.put("startTime", "(" + startTime + " , ");
                         slot.put("lastTime", lastTime + ")");
                         slot.put("status", status);
                         slotArrayList.add(slot);
                     }
                     listAdaptrSlot = new SimpleAdapter(getActivity(), slotArrayList, R.layout.list_tut_slot,
-                            new String[]{"startTime", "lastTime", "status"}, new int[]{R.id.txtStart,
-                            R.id.txtLast, R.id.txtStatus});
+                            new String[]{"startTime", "lastTime", "status", "slot_id"}, new int[]{R.id.txtStart,
+                            R.id.txtLast, R.id.txtStatus, R.id.txtTutSlotId});
                     listViewSlot.setAdapter(listAdaptrSlot);
                     setListViewHeightBasedOnChildren(listViewSlot);
+                    listViewSlot.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            String send = listViewSlot.getItemAtPosition(position).toString();
+                            arr1 = send.split("[{=,()}]");
+
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            // Get the layout inflater
+                            LayoutInflater inflater = getActivity().getLayoutInflater();
+
+                            // Inflate and set the layout for the dialog
+                            // Pass null as the parent view because its going in the dialog layout
+                            builder.setTitle("Action!")
+                                    // Add action buttons
+                                    .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(final DialogInterface dialog, int id) {
+                                            //final ProgressDialog dialog1;
+                                            //Toast.makeText(getContext(), "Bhak", Toast.LENGTH_SHORT).show();
+
+                                            String urlUpdate = Config.baseUrl2 + "TM_Script/deleteTutorSlot.php";
+                                            final ProgressDialog dialog1 = ProgressDialog.show(getContext(), "", "Please Wait", false, false);
+                                            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
+                                                @Override
+                                                public void onResponse(String response) {
+                                                    dialog1.dismiss();
+                                                    Log.e("Aligarh", response);
+                                                    if (response.toString().contains("success")) {
+                                                        Toast.makeText(getContext(), "Successfully Deleted", Toast.LENGTH_LONG).show();
+                                                        Intent in = new Intent(getContext(), TutorProfile.class);
+                                                        startActivity(in);
+                                                    } else if (response.toString().contains("failure")) {
+                                                        Toast.makeText(getContext(), "Please try Again", Toast.LENGTH_LONG).show();
+                                                    } else if (response.toString().contains("failed")) {
+                                                        Toast.makeText(getContext(), "Error Occured", Toast.LENGTH_LONG).show();
+                                                    }
+                                                }
+                                            }, new Response.ErrorListener() {
+                                                @Override
+                                                public void onErrorResponse(VolleyError error) {
+                                                    dialog1.dismiss();
+                                                    Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                                                }
+                                            }) {
+                                                @Override
+                                                protected Map<String, String> getParams() throws AuthFailureError {
+                                                    Map<String, String> param = new HashMap<>();
+                                                    param.put("slotId", arr1[11]);
+                                                    return param;
+                                                }
+                                            };
+                                            RequestHandler.getInstance(getContext()).addToRequestQueue(stringRequest);
+
+
+                                        }
+                                    })
+                                    .setNegativeButton("Update", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            // LoginDialogFragment.this.getDialog().cancel();
+
+                                            Intent intentSlot = new Intent(getContext(), UpdateTutSlot.class);
+                                            intentSlot.putExtra("slotStart", arr1[8]);
+                                            intentSlot.putExtra("slotEnd", arr1[4]);
+                                            intentSlot.putExtra("slot_id", arr1[11]);
+                                            // intentSlot.putExtra("data",send);
+                                            startActivity(intentSlot);
+                                            // Toast.makeText(getContext(), "Bhak", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    });
+                            builder.create();
+                            builder.show();
+
+
+                            //Toast.makeText(getContext(),"Oho0",Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -355,10 +510,74 @@ public class TutorMainProfile extends Fragment implements View.OnClickListener {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             String send = listViewSkill.getItemAtPosition(position).toString();
-                            String[] arr = send.split("[{=,}]");
-                            Intent intent5 = new Intent(getContext(), UpdateSkillTutor.class);
-                            intent5.putExtra("id", arr[2]);
-                            startActivity(intent5);
+                            arr2 = send.split("[{=,}]");
+
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                            // Get the layout inflater
+                            LayoutInflater inflater = getActivity().getLayoutInflater();
+
+                            // Inflate and set the layout for the dialog
+                            // Pass null as the parent view because its going in the dialog layout
+                            builder.setTitle("Action!")
+                                    // Add action buttons
+                                    .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(final DialogInterface dialog, int id) {
+                                            //final ProgressDialog dialog1;
+                                            //Toast.makeText(getContext(), "Bhak", Toast.LENGTH_SHORT).show();
+
+                                            String urlUpdate = Config.baseUrl2 + "TM_Script/deleteTutorSkill.php";
+                                            final ProgressDialog dialog1 = ProgressDialog.show(getContext(), "", "Please Wait", false, false);
+                                            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
+                                                @Override
+                                                public void onResponse(String response) {
+                                                    dialog1.dismiss();
+                                                    Log.e("Aligarh", response);
+                                                    if (response.toString().contains("success")) {
+                                                        Toast.makeText(getContext(), "Successfully Deleted", Toast.LENGTH_LONG).show();
+                                                        Intent in = new Intent(getContext(), TutorProfile.class);
+                                                        startActivity(in);
+                                                    } else if (response.toString().contains("failure")) {
+                                                        Toast.makeText(getContext(), "Please try Again", Toast.LENGTH_LONG).show();
+                                                    } else if (response.toString().contains("failed")) {
+                                                        Toast.makeText(getContext(), "Error Occured", Toast.LENGTH_LONG).show();
+                                                    }
+                                                }
+                                            }, new Response.ErrorListener() {
+                                                @Override
+                                                public void onErrorResponse(VolleyError error) {
+                                                    dialog1.dismiss();
+                                                    Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                                                }
+                                            }) {
+                                                @Override
+                                                protected Map<String, String> getParams() throws AuthFailureError {
+                                                    Map<String, String> param = new HashMap<>();
+                                                    param.put("skillId", arr2[2]);
+                                                    return param;
+                                                }
+                                            };
+                                            RequestHandler.getInstance(getContext()).addToRequestQueue(stringRequest);
+
+
+                                        }
+                                    })
+                                    .setNegativeButton("Update", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            // LoginDialogFragment.this.getDialog().cancel();
+                                            Intent intent5 = new Intent(getContext(), UpdateSkillTutor.class);
+                                            intent5.putExtra("id", arr2[2]);
+                                            startActivity(intent5);
+                                            // Toast.makeText(getContext(), "Bhak", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    });
+                            builder.create();
+                            builder.show();
+
+
                             //Toast.makeText(getContext(),"Oho0",Toast.LENGTH_SHORT).show();
                         }
                     });

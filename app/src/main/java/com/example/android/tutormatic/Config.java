@@ -5,6 +5,7 @@ package com.example.android.tutormatic;
  */
 public class Config {
     public static final String baseUrl = "http://amualumnimeet.com/tutorMatic/";
-    public static final String baseUrl2 = "http://98c4c7f1.ngrok.io/";
+    public static final String baseUrl2 = "http://amualumnimeet.com/";
+    public static final String baseUrl3="http://b62a7f70.ngrok.io/";
 
 }

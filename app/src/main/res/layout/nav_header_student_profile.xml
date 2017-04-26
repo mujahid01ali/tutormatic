@@ -13,26 +13,21 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@android:drawable/sym_def_app_icon" />
+        android:src="@drawable/amu" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:id="@+id/txtHeadName"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:textSize="25dp"/>
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtHeadType"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:textSize="25dp"/>
+        android:id="@+id/txtHeadType" />
 
 </LinearLayout>

@@ -18,9 +18,99 @@
         <item>Student</item>
         <item>Tutor</item>
     </string-array>
+    <string name="type_prompt">Choose Any One</string>
+    <string-array name="type_arrays">
+        <item>Student</item>
+        <item>Tutor</item>
+    </string-array>
+
+    <string name="class_prompt">Rating</string>
+    <string-array name="class_arrays">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>Inter Mediate</item>
+        <item>Under graduate</item>
+        <item>Post Graduate</item>
+        <item>Ph.D</item>
+        <item>Not Studying</item>
+    </string-array>
+
+
+    <string name="rating_prompt">Rating</string>
+    <string-array name="rating_arrays">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string name="state_prompt">State</string>
+    <string-array name="state_arrays">
+        <item>Choose</item>
+        <item>Andra Pradesh</item>
+        <item>Arunachal</item>
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Chhattisgarh</item>
+        <item>Goa</item>
+        <item>Gujrat</item>
+        <item>Haryana</item>
+        <item>Himachal Pradesh</item>
+        <item>Jammu and Kashmir</item>
+        <item>Jharkhand</item>
+        <item>Karnataka</item>
+        <item>Kerala</item>
+        <item>Madya Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Manipur</item>
+        <item>Meghalaya</item>
+        <item>Mizoram</item>
+        <item>Nagaand</item>
+        <item>Orissa</item>
+        <item>Panjab</item>
+        <item>Rajasthan</item>
+        <item>Sikkim</item>
+        <item>Tamil Nadu</item>
+        <item>Tripura</item>
+        <item>Uttaranchal</item>
+        <item>Uttar Pradesh</item>
+        <item>West Bengal</item>
+    </string-array>
+
+    <string name="slot_prompt">Any One</string>
+    <string-array name="slot_arrays">
+        <item>Choose</item>
+        <item>Active</item>
+        <item>Inactive</item>
+    </string-array>
+
+    <string name="search_prompt">Any One</string>
+    <string-array name="search_arrays">
+        <item>Choose</item>
+        <item>By Name</item>
+        <item>By Subject</item>
+        <item>By Class</item>
+        <item>By Location</item>
+
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_insert_education_tutor">InsertEducationTutor</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_tutor_list_home">TutorListHome</string>
+    <string name="title_activity_student_list_home">StudentListHome</string>
+    <string name="title_activity_otp_auth">OtpAuth</string>
+    <string name="title_activity_otp_recieve_check">OtpRecieveCheck</string>
 </resources>

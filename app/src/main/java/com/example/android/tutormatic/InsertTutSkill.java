@@ -1,8 +1,11 @@
 package com.example.android.tutormatic;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +25,18 @@ public class InsertTutSkill extends AppCompatActivity implements View.OnClickLis
     Button btnSkillSave;
     ProgressDialog dialog;
     String url = Config.baseUrl2 + "TM_Script/addTutorSkill.php";
+    private String blockCharacterSet = "~#={}()^,|$%&*!";
+    private InputFilter filter = new InputFilter() {
+
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+
+            if (source != null && blockCharacterSet.contains(("" + source))) {
+                return "";
+            }
+            return null;
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +44,9 @@ public class InsertTutSkill extends AppCompatActivity implements View.OnClickLis
         txtSkill = (EditText) findViewById(R.id.txtSkill);
         txtSkillExp = (EditText) findViewById(R.id.txtSkillExp);
         txtSkillDes = (EditText) findViewById(R.id.txtSkillDes);
+        txtSkill.setFilters(new InputFilter[]{filter});
+        txtSkillDes.setFilters(new InputFilter[]{filter});
+        txtSkillDes.setFilters(new InputFilter[]{filter});
         btnSkillSave = (Button) findViewById(R.id.btnSkillSave);
         btnSkillSave.setOnClickListener(this);
     }
@@ -50,6 +68,9 @@ public class InsertTutSkill extends AppCompatActivity implements View.OnClickLis
                 dialog.dismiss();
                 if (response.toString().contains("success")) {
                     Toast.makeText(getApplicationContext(), "You Are SuccessFully save your Skill", Toast.LENGTH_LONG).show();
+                    Intent intent=new Intent(InsertTutSkill.this,TutorProfile.class);
+                    startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Please retry Again", Toast.LENGTH_LONG).show();
                 }
